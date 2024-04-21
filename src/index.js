@@ -58,12 +58,13 @@ app.post('/', async (req, res) => {
 });
 
 
-app.listen(5000);
+app.listen(80);
 
 async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 	console.log(`--- Finding Artists... ---\nQuery: ${genres}\nLimit: ${customLimit}\nOffset: ${customOffset}`);
 	var json_array = [];
 	var artists_names = [];
+	genres = genres.toLowerCase();
 	var file_name = __dirname + `/searches/${genres.replaceAll(',','_').replaceAll(' ', '-')}-${customOffset}-${customLimit}.json`
 	if(fs.existsSync(file_name)) {
 		var results;
