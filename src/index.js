@@ -1,11 +1,9 @@
 import * as fs from 'fs';
 import express from 'express';
-import serverless from 'serverless-http';
 import * as cheerio from 'cheerio';
 import {MusicBrainzApi} from 'musicbrainz-api';
 import path from 'path';
 import {fileURLToPath} from 'url';
-import { isUndefined } from 'util';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,14 +17,6 @@ const mbApi = new MusicBrainzApi({
 });
 
 const app = express();
-const router = express.Router();
-
-router.get('/', (req, res) => {
-	res.send("App is running...");
-});
-
-app.use('/.netlify/functions/app', router);
-module.exports.handler = serverless(app);
 
 app.use(express.json());
 app.use(express.urlencoded({

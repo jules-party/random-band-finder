@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "netlify deploy --prod"
+    "test": "echo 'test'"
   },
   "keywords": [],
   "author": "",
@@ -14,10 +14,5 @@
     "cheerio": "^1.0.0-rc.12",
     "express": "^4.19.2",
     "musicbrainz-api": "^0.15.0"
-  },
-  "dependencies": {
-    "netlify-cli": "^17.22.1",
-    "netlify-lambda": "^2.0.16",
-    "serverless-http": "^3.2.0"
   }
 }

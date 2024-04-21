@@ -129,5 +129,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# Local Netlify folder
-.netlify
+# searches
+./src/searches
