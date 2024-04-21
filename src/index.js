@@ -64,7 +64,7 @@ async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 	console.log(`--- Finding Artists... ---\nQuery: ${genres}\nLimit: ${customLimit}\nOffset: ${customOffset}`);
 	var json_array = [];
 	var artists_names = [];
-	var file_name = __dirname + `/searches/${genres.replaceAll(',','_')}-${customOffset}-${customLimit}.json`
+	var file_name = __dirname + `/searches/${genres.replaceAll(',','_').replaceAll(' ', '-')}-${customOffset}-${customLimit}.json`
 	if(fs.existsSync(file_name)) {
 		var results;
 		var rawdata = fs.readFileSync(file_name);
