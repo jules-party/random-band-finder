@@ -47,11 +47,11 @@ app.post('/', async (req, res) => {
 			return;
 		}
 
-		var args = [req.body.genreInput.replace(' ','-'), __limit, __offset];
+		var args = [req.body.genreInput, __limit, __offset];
 		const items = await getArtistsNames(args[0], args[1], args[2]);
 		var band = items[Math.floor(Math.random()*items.length)];
 		$('#band').text(band);
-		$('#genre').val(req.body.genreInput);
+		$('#genre').val(args[0]);
 
 		res.send($.html());
 	});
@@ -64,7 +64,7 @@ async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 	console.log(`--- Finding Artists... ---\nQuery: ${genres}\nLimit: ${customLimit}\nOffset: ${customOffset}`);
 	var json_array = [];
 	var artists_names = [];
-	var file_name = __dirname + `/searches/${genres.replace(',','_')}-${customOffset}-${customLimit}.json`
+	var file_name = __dirname + `/searches/${genres.replaceAll(',','_')}-${customOffset}-${customLimit}.json`
 	if(fs.existsSync(file_name)) {
 		var results;
 		var rawdata = fs.readFileSync(file_name);
@@ -76,14 +76,14 @@ async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 			}
 		}
 	} else {
-		const temp = await mbApi.search('artist', {query: `tag:${genres}`, offset: 0, limit: 1});
+		const temp = await mbApi.search('artist', {query: `tag:\"${genres}\"`, offset: 0, limit: 1});
 		var count = temp.count
 		if(customLimit < 100 && customLimit != 0) {
-			const results = await mbApi.search('artist', {query: `tag:${genres}`, offset: customOffset, limit: customLimit});
+			const results = await mbApi.search('artist', {query: `tag:\"${genres}\"`, offset: customOffset, limit: customLimit});
 			json_array.push(results);
 		} else {
 			for(let i = 0; i <= ((count - (count % 100)) / 100); i++) {
-				const results = await mbApi.search('artist', {query: `tag:${genres}`, offset: (i * 100) + customOffset, limit: 100});
+				const results = await mbApi.search('artist', {query: `tag:\"${genres}\"`, offset: (i * 100) + customOffset, limit: 100});
 				json_array.push(results);
 			}
 		}
@@ -97,7 +97,7 @@ async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 			}
 		}
 		
-		fs.writeFile(__dirname + `/searches/${genres.replace(',','_')}-${customOffset}-${customLimit}.json`, jsonString, 'utf8', function(err) {
+		fs.writeFile(__dirname + `/searches/${genres.replaceAll(',','_').replaceAll(' ', '-')}-${customOffset}-${customLimit}.json`, jsonString, 'utf8', function(err) {
 			if(err) {
 				console.log(err);
 			}
