@@ -36,6 +36,12 @@ input {
     padding: 10px;
 }
 
+.m-config {
+    background-color: #C6C6C6;
+    border: #767676 1px solid;
+    border-radius: 4px;
+}
+
 #submitLimit {
     background: none;
     color: blue;

@@ -2,34 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
     <title>Random Band Finder</title>
 </head>
-<script src="./js/main.js"></script>
 <body>
     <div class="container">
-        <div class="main">
+        <div id="main" class="main">
             <p>Insert Any Genre on <a href="https://musicbrainz.org/genres">MusicBrainz</a>
             <br>Seperate genres by a comma without any spaces!<br>e.g. 'emo,screamo'</p>
-            <form method="post" action="/">
-                <input type="test" id="genre" name="genreInput"><br>
-                <input type="submit" id="submit" value="Submit" onclick="htmlClick()">
-            </form>
+            <input type="test" id="genre" name="genreInput"><br>
+            <input name="querySubmit" type="submit" id="submit" value="Submit">
             <p id="band">A random band will appear here!</p>
             <p>If the input is left blank, it will not search!</p>
         </div>
-        <div class="config">
-            <form method="post" action="/">
-                <label for="limit">Total Limit: </label>
-                <input type="test" id="limit" name="limitInput"><br><br>
-                <label for="offset">Offset: </label>
-                <input type="test" id="offset" name="offsetInput"><br><br>
-                <input type="submit" id="submitLimit" value="Save">
-            </form>
+        <div id="config" class="config">
+            <label for="limit">Total Limit: </label>
+            <input type="test" id="limit" name="limit"><br><br>
+            <label for="offset">Offset: </label>
+            <input type="test" id="offset" name="offset"><br><br>
+            <input name="limitSubmit" type="submit" id="submitLimit" value="Save">
 
             <center>Leave blank if you do<br>not wish to change these settings.</center>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity= 
+        "sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" 
+        crossorigin="anonymous"> 
+    </script> 
+    <script src="./js/main.js"></script>
 </body>
 </html>
