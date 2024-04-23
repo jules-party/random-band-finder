@@ -1,5 +1,7 @@
 import * as fs from 'fs';
 import express from 'express';
+import https from 'https';
+import http from 'http';
 import * as cheerio from 'cheerio';
 import {MusicBrainzApi} from 'musicbrainz-api';
 import path from 'path';
@@ -16,6 +18,15 @@ const mbApi = new MusicBrainzApi({
 	appName: 'random-band-finder',
 	appVersion: '1.0.0',
 });
+
+const _HTTPS_INFO_ = {
+	key: '/usr/local/etc/letsencrypt/live/example.com/privkey.pem',
+	cert: '/usr/local/etc/letsencrypt/live/example.com/fullchain.pem'
+};
+const _HTTPS_OPTIONS_ = {
+	key: fs.readFileSync(_HTTPS_INFO_.key),
+	cert: fs.readFileSync(_HTTPS_INFO_.cert)
+};
 
 const app = express();
 
@@ -52,8 +63,8 @@ app.post('/', async (req, res) => {
 	});
 });
 
-
-app.listen(_PORT_);
+http.createServer(app).listen(80);
+https.createServer(_HTTPS_OPTIONS_, app).listen(443);
 
 async function getArtistsNames(genres, customLimit = 0, customOffset = 0) {
 	console.log(`--- Finding Artists... ---\nQuery: ${genres}\nLimit: ${customLimit}\nOffset: ${customOffset}`);

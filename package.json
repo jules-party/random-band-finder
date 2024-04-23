@@ -14,5 +14,9 @@
     "cheerio": "^1.0.0-rc.12",
     "express": "^4.19.2",
     "musicbrainz-api": "^0.15.0"
+  },
+  "dependencies": {
+    "http": "^0.0.1-security",
+    "https": "^1.0.0"
   }
 }
